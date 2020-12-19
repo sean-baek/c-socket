@@ -1,7 +1,6 @@
 /*
 
 ------------------------------------------
-|    This code was written by sean.      |
 |                                        |
 |     This code was written using C      |
 |                                        |

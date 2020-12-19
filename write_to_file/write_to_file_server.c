@@ -1,7 +1,6 @@
 /*
 
 ------------------------------------------
-|    This code was written by ss0x00.    |
 |                                        |
 |     This code was written using C      |
 |                                        |
