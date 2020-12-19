@@ -25,7 +25,7 @@
 #define _dp(n, fmt, args...)
 #endif	/* DEBUG_LEVEL_ */
 
-/*IP ì •ë³´ ê°€ì ¸ì˜¤ê¸°*/
+/*IP Á¤º¸ °¡Á®¿À±â*/
 int getIPAddress(char *ip_addr)
 {
 
@@ -58,7 +58,7 @@ int getIPAddress(char *ip_addr)
 
 
 
-//Subnetmask ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+//Subnetmask Á¤º¸ °¡Á®¿À±â
 
 int getSubnetMask(char *sub_addr)
 
@@ -93,7 +93,7 @@ int getSubnetMask(char *sub_addr)
 
 
 
-//Broadcast ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+//Broadcast Á¤º¸ °¡Á®¿À±â
 
 int getBroadcastAddress(char *br_addr)
 
@@ -136,7 +136,7 @@ int getBroadcastAddress(char *br_addr)
 
 
 
-//Mac address ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+//Mac address Á¤º¸ °¡Á®¿À±â
 
 int getMacAddress(char *mac)
 
@@ -198,7 +198,7 @@ int getMacAddress(char *mac)
 
 
 
-//ë³´ê¸° í¸í•œ í¬ë§·ìœ¼ë¡œ Mac addressë¥¼ ë³€ê²½í•´ì¤€ë‹¤. - í•¨ìˆ˜ ì¶œì²˜ : http://hkpco.kr/code/netinfo.c
+//º¸±â ÆíÇÑ Æ÷¸ËÀ¸·Î Mac address¸¦ º¯°æÇØÁØ´Ù. - ÇÔ¼ö ÃâÃ³ : http://hkpco.kr/code/netinfo.c
 
 void convrt_mac(const char *data, char *cvrt_str, int sz)
 
@@ -242,12 +242,12 @@ void convrt_mac(const char *data, char *cvrt_str, int sz)
 
 
 
- /*NIC ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+ /*NIC Á¤º¸ °¡Á®¿À±â
 
-NICì´ 'eth0'ìœ¼ë¡œ ë˜ì–´ìˆì§€ ì•Šì€ê²½ìš°ì— ì‚¬ìš©í–ˆìŒ.
+NICÀÌ 'eth0'À¸·Î µÇ¾îÀÖÁö ¾ÊÀº°æ¿ì¿¡ »ç¿ëÇßÀ½.
 */
 
-int getNIC() //eth0ì™€ ê°™ì€ NICì„ ê°€ì ¸ì˜¨ë‹¤.
+int getNIC() //eth0¿Í °°Àº NICÀ» °¡Á®¿Â´Ù.
 
 {
 
@@ -303,7 +303,7 @@ int getNIC() //eth0ì™€ ê°™ì€ NICì„ ê°€ì ¸ì˜¨ë‹¤.
 
 	{
 
-		if(strcmp(ifr[i].ifr_name, "lo") != 0) //'lo'ë¥¼ ì œì™¸í•œ ë‚˜ë¨¸ì§€ NICì„ ê°€ì ¸ì˜¨ë‹¤.
+		if(strcmp(ifr[i].ifr_name, "lo") != 0) //'lo'¸¦ Á¦¿ÜÇÑ ³ª¸ÓÁö NICÀ» °¡Á®¿Â´Ù.
 
 		{
 
@@ -322,3 +322,4 @@ int getNIC() //eth0ì™€ ê°™ì€ NICì„ ê°€ì ¸ì˜¨ë‹¤.
 	return 1;
 
 }
+
