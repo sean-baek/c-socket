@@ -46,46 +46,46 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	
-	//socket ìƒì„± | Create socket
+	//socket »ı¼º | Create socket
 	sock = socket(PF_INET, SOCK_STREAM, 0);
 
-	//socket ìƒì„±ì— ëŒ€í•œ ì—ëŸ¬ ë©”ì„¸ì§€ ì¶œë ¥ | If can't create a socket, print error message
+	//socket »ı¼º¿¡ ´ëÇÑ ¿¡·¯ ¸Ş¼¼Áö Ãâ·Â | If can't create a socket, print error message
 	if(sock == -1)
 		error_handling("Not created socket....");
 
-	//ì£¼ì†Œ ì •ë³´ë¥¼ ë‹´ì„ êµ¬ì¡°ì²´ ì´ˆê¸°í™” | Initialize the structure of the address information
+	//ÁÖ¼Ò Á¤º¸¸¦ ´ãÀ» ±¸Á¶Ã¼ ÃÊ±âÈ­ | Initialize the structure of the address information
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
 	serv_addr.sin_port = htons(atoi(argv[2]));
 	
-	//ì—°ê²° ì‹œë„ | Connection attempt
+	//¿¬°á ½Ãµµ | Connection attempt
 	if(connect(sock, (struct sockaddr*) &serv_addr, sizeof(serv_addr)) == -1)
 		error_handling("couldn't send request!");
 
-	//ì„œë²„ë¡œë¶€í„° ì ‘ì† ì„±ê³µ ë©”ì„¸ì§€ ë°›ê¸° | Receive a connection success message from the server
+	//¼­¹ö·ÎºÎÅÍ Á¢¼Ó ¼º°ø ¸Ş¼¼Áö ¹Ş±â | Receive a connection success message from the server
 	str_len = read(sock, message, sizeof(message)-1);
 	if(str_len == -1)
 		error_handling("Can't read server's message");
 	
-	//ì„œë²„ë¡œë¶€í„° ë°›ì€ ì ‘ì† ì„±ê³µ ë©”ì„¸ì§€ ì¶œë ¥ | Print connection success message from server
+	//¼­¹ö·ÎºÎÅÍ ¹ŞÀº Á¢¼Ó ¼º°ø ¸Ş¼¼Áö Ãâ·Â | Print connection success message from server
 	printf("\nMessage from server : %s \n", message);
 
 
-	//test.txtíŒŒì¼ì„ ì½ê¸° ëª¨ë“œë¡œ ì—´ê¸° | Open the test.txt in Read mode
+	//test.txtÆÄÀÏÀ» ÀĞ±â ¸ğµå·Î ¿­±â | Open the test.txt in Read mode
     	f = open("test.txt", O_RDONLY);
 	
-	//íŒŒì¼ ì—´ê¸° ì˜¤ë¥˜ ì‹œ ì—ëŸ¬ ë©”ì„¸ì§€ ì¶œë ¥ | 	If can't open the file, print error message
+	//ÆÄÀÏ ¿­±â ¿À·ù ½Ã ¿¡·¯ ¸Ş¼¼Áö Ãâ·Â | 	If can't open the file, print error message
     	if(f == -1)
         	error_handling("Couldn't created file");
 
-	//íŒŒì¼ì˜ ë‚´ìš© ì½ê¸° | Read the file's data
+	//ÆÄÀÏÀÇ ³»¿ë ÀĞ±â | Read the file's data
 	if(read(f, buf, sizeof(buf)) == -1)
         	error_handling("Can't read from the server's file");
 
 	printf("File data : %s", buf);
 	
-	//ì†Œì¼“ ë‹«ê¸° | Close sockets
+	//¼ÒÄÏ ´İ±â | Close sockets
 	close(sock);
 	close(f);
 
@@ -98,3 +98,4 @@ void error_handling(char *message)
 	fputc('\n', stderr);
 	exit(1);
 }
+

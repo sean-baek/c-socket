@@ -38,17 +38,17 @@ int main(int argc, char *argv[])
 	struct sockaddr_in clnt_addr;
 	socklen_t clnt_addr_size;
 	
-	//ì†Œì¼“ ìƒì„± | Create socket
+	//¼ÒÄÏ »ı¼º | Create socket
 	sock = socket(PF_INET, SOCK_STREAM, 0);
 	
-	//íŒŒì¼ ì†Œì¼“ ìƒì„± | Create file socket
+	//ÆÄÀÏ ¼ÒÄÏ »ı¼º | Create file socket
 	f = open("test.txt" , O_CREAT|O_WRONLY|O_TRUNC);
 	
-	//ë³€ìˆ˜ fì˜ íŒŒì¼ ë””ìŠ¤í¬ë¦½í„°ê°€ -1ì´ë©´ ì—ëŸ¬ ë©”ì„¸ì§€ ì¶œë ¥ | If f's File descriptor is -1, print error message
+	//º¯¼ö fÀÇ ÆÄÀÏ µğ½ºÅ©¸³ÅÍ°¡ -1ÀÌ¸é ¿¡·¯ ¸Ş¼¼Áö Ãâ·Â | If f's File descriptor is -1, print error message
 	if(f == -1)
 		error_handling("Can't creat file....");
 	
-	//íŒŒì¼ì— ë‚´ìš© ì…ë ¥ | Write on file
+	//ÆÄÀÏ¿¡ ³»¿ë ÀÔ·Â | Write on file
 	if(write(f, message, sizeof(message)) == -1)
 		error_handling("Can't write to file!");
 	
@@ -58,38 +58,38 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	
-	//ë³€ìˆ˜ sockì˜ íŒŒì¼ ë””ìŠ¤í¬ë¦½í„°ê°€ -1ì´ë©´ ì—ëŸ¬ ë©”ì„¸ì§€ ì¶œë ¥ | If sock's File descriptor is -1, print error message
+	//º¯¼ö sockÀÇ ÆÄÀÏ µğ½ºÅ©¸³ÅÍ°¡ -1ÀÌ¸é ¿¡·¯ ¸Ş¼¼Áö Ãâ·Â | If sock's File descriptor is -1, print error message
 	if(sock == -1)
 		error_handling("Not created socket....");
 	
-	//ì•„ì´í”¼ì™€ í¬íŠ¸ë²ˆí˜¸ë¥¼ ë‹´ì„ êµ¬ì¡°ì²´ë¥¼ ì´ˆê¸°í™” | Initialize the structure to hold the IP and port number
+	//¾ÆÀÌÇÇ¿Í Æ÷Æ®¹øÈ£¸¦ ´ãÀ» ±¸Á¶Ã¼¸¦ ÃÊ±âÈ­ | Initialize the structure to hold the IP and port number
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_addr.sin_port = htons(atoi(argv[1]));
 	
-	//ì†Œì¼“ì— ì•„ì´í”¼ì™€ í¬íŠ¸ë²ˆí˜¸ ë¶€ì—¬ | Give IP and port number to socket
+	//¼ÒÄÏ¿¡ ¾ÆÀÌÇÇ¿Í Æ÷Æ®¹øÈ£ ºÎ¿© | Give IP and port number to socket
 	if(bind(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1)
 			error_handling("Can't assign Ip and Port number!\n");
 	
-	//í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ì„ ë°›ì„ ìˆ˜ ìˆë„ë¡ ëŒ€ê¸° ìƒíƒœë¡œ ìœ ì§€ | Wait until client's request comes in
+	//Å¬¶óÀÌ¾ğÆ®ÀÇ ¿äÃ»À» ¹ŞÀ» ¼ö ÀÖµµ·Ï ´ë±â »óÅÂ·Î À¯Áö | Wait until client's request comes in
 	if(listen(sock, 5) == -1)
 		error_handling("Can't listen of the client's request!\n");
 	else
 		printf("Watting the client....\n");
 	
-	//í´ë¼ì´ì–¸íŠ¸ ìˆ˜ë½ | Response client's request
+	//Å¬¶óÀÌ¾ğÆ® ¼ö¶ô | Response client's request
 	clnt_addr_size = sizeof(clnt_addr);
 	clnt_sock = accept(sock, (struct sockaddr*) &clnt_addr, &clnt_addr_size);
 	
-	//í´ë¼ì´ì–¸íŠ¸ë¥¼ ìˆ˜ë½í•˜ì§€ ëª»í–ˆì„ ë•Œ ì—ëŸ¬ ë©”ì„¸ì§€ ì¶œë ¥ | printf an error message when the client is not accepted
+	//Å¬¶óÀÌ¾ğÆ®¸¦ ¼ö¶ôÇÏÁö ¸øÇßÀ» ¶§ ¿¡·¯ ¸Ş¼¼Áö Ãâ·Â | printf an error message when the client is not accepted
 	if(clnt_sock == -1)
 		error_handling("Can't response client's request!");
 	
-	//í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì ‘ì† ì„±ê³µ ë©”ì„¸ì§€ ë³´ë‚´ê¸° | Send a connection success message to the client
+	//Å¬¶óÀÌ¾ğÆ®¿¡°Ô Á¢¼Ó ¼º°ø ¸Ş¼¼Áö º¸³»±â | Send a connection success message to the client
 	write(clnt_sock, message_, sizeof(message_));
 
-	//ì†Œì¼“ë“¤ ë‹«ê¸° | Close sockets
+	//¼ÒÄÏµé ´İ±â | Close sockets
 	close(sock);
 	close(clnt_sock);
 	close(f);
@@ -103,3 +103,4 @@ void error_handling(char *message)
 	fputc('\n', stderr);
 	exit(1);
 }
+
