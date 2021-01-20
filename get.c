@@ -322,4 +322,3 @@ int getNIC() //eth0와 같은 NIC을 가져온다.
 	return 1;
 
 }
-
